@@ -8,8 +8,7 @@ def align_matrix(context: bpy.types.Context):
     loc = mathutils.Matrix.Translation(context.scene.cursor.location)
     obj_align = context.preferences.edit.object_align
 
-    if (context.space_data.type == 'VIEW_3D'
-        and obj_align == 'VIEW'):
+    if context.space_data.type == 'VIEW_3D' and obj_align == 'VIEW':
         rot = context.space_data.region_3d.view_matrix.to_3x3().inverted().to_4x4()
     else:
         rot = mathutils.Matrix()
