@@ -8,13 +8,8 @@ bl_info = {
     "category": "Add Mesh",
 }
 
-if "bpy" in locals():
-    import importlib
-    importlib.reload(FibonacciLattice)
-else:
-    from add_fibonacci_lattice import FibonacciLattice
-
 import bpy
+from . import FibonacciLattice
 
 ################################################################################
 ##### REGISTER #####
