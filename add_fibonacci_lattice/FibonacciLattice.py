@@ -13,7 +13,7 @@ def align_matrix(context: bpy.types.Context):
     else:
         rot = mathutils.Matrix()
         
-    result = loc * rot
+    result = loc @ rot
     
     return result
 
