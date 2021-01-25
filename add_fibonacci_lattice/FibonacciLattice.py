@@ -96,13 +96,12 @@ class add_mesh_fibonacci_lattice(bpy.types.Operator):
         fiblat_mesh.update()
 
         fiblat_object = bpy.data.objects.new("FibonacciLattice", fiblat_mesh)
-        fiblat_object.matrix_world = align_matrix(context)
+        #fiblat_object.matrix_world = align_matrix(context)
 
-        scene = bpy.context.scene
-        scene.objects.link(fiblat_object)
+        bpy.context.collection.objects.link(fiblat_object)
         
         bpy.ops.object.select_all(action='DESELECT')
-        fiblat_object.select = True
+        fiblat_object.select_set(True)
         
         return {'FINISHED'}
         
