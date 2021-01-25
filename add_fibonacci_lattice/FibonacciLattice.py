@@ -4,10 +4,10 @@ import mathutils
 
 from bpy.props import *
 
-def align_matrix(context):
-    loc = mathutils.Matrix.Translation(context.scene.cursor_location)
-    obj_align = context.user_preferences.edit.object_align
-    
+def align_matrix(context: bpy.types.Context):
+    loc = mathutils.Matrix.Translation(context.scene.cursor.location)
+    obj_align = context.preferences.edit.object_align
+
     if (context.space_data.type == 'VIEW_3D'
         and obj_align == 'VIEW'):
         rot = context.space_data.region_3d.view_matrix.to_3x3().inverted().to_4x4()
@@ -96,7 +96,7 @@ class add_mesh_fibonacci_lattice(bpy.types.Operator):
         fiblat_mesh.update()
 
         fiblat_object = bpy.data.objects.new("FibonacciLattice", fiblat_mesh)
-        #fiblat_object.matrix_world = align_matrix(context)
+        fiblat_object.matrix_world = align_matrix(context)
 
         bpy.context.collection.objects.link(fiblat_object)
         
