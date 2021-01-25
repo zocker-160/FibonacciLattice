@@ -4,17 +4,16 @@ import mathutils
 
 from bpy.props import *
 
-def align_matrix(context):
-    loc = mathutils.Matrix.Translation(context.scene.cursor_location)
-    obj_align = context.user_preferences.edit.object_align
-    
-    if (context.space_data.type == 'VIEW_3D'
-        and obj_align == 'VIEW'):
+def align_matrix(context: bpy.types.Context):
+    loc = mathutils.Matrix.Translation(context.scene.cursor.location)
+    obj_align = context.preferences.edit.object_align
+
+    if context.space_data.type == 'VIEW_3D' and obj_align == 'VIEW':
         rot = context.space_data.region_3d.view_matrix.to_3x3().inverted().to_4x4()
     else:
         rot = mathutils.Matrix()
         
-    result = loc * rot
+    result = loc @ rot
     
     return result
 
@@ -26,26 +25,34 @@ class add_mesh_fibonacci_lattice(bpy.types.Operator):
     bl_description = "adds Fibonacci lattice"
   
     # Whether to add or update.
-    edit = BoolProperty(name="",
+    edit: BoolProperty(
+        name="",
         description="",
         default=False,
-        options={'HIDDEN'})
+        options={'HIDDEN'}
+    )
     
     # Number of lattice points
-    fl_Num_Points = IntProperty(attr='fl_Num_Points',
+    fl_Num_Points: IntProperty(
+        attr='fl_Num_Points',
         name='Number of points', default = 50,
         min = 1, soft_min = 1,
-        description='Number of points to be distributed on Fibonacci lattice')
+        description='Number of points to be distributed on Fibonacci lattice'
+    )
        
     # Radius
-    fl_Radius = FloatProperty(attr='fl_Radius',
+    fl_Radius: FloatProperty(
+        attr='fl_Radius',
         name='Radius', default = 1,
         min = 0, soft_min = 0,
-        description='Sphere which the Fibonacci lattice will be wrapped around')
+        description='Sphere which the Fibonacci lattice will be wrapped around'
+    )
 
-    fl_Edges = BoolProperty(attr='fl_Edges',
+    fl_Edges: BoolProperty(
+        attr='fl_Edges',
         name="Generate edges", default = False,
-        description="Generate edges for lattice spiral (uncheck for vertices only)")
+        description="Generate edges for lattice spiral (uncheck for vertices only)"
+    )
                         
     def draw(self, context):
         layout = self.layout
@@ -90,11 +97,10 @@ class add_mesh_fibonacci_lattice(bpy.types.Operator):
         fiblat_object = bpy.data.objects.new("FibonacciLattice", fiblat_mesh)
         fiblat_object.matrix_world = align_matrix(context)
 
-        scene = bpy.context.scene
-        scene.objects.link(fiblat_object)
+        bpy.context.collection.objects.link(fiblat_object)
         
         bpy.ops.object.select_all(action='DESELECT')
-        fiblat_object.select = True
+        fiblat_object.select_set(True)
         
         return {'FINISHED'}
         
@@ -102,4 +108,3 @@ class add_mesh_fibonacci_lattice(bpy.types.Operator):
     def invoke(self, context, event):
         self.execute(context)
         return {'FINISHED'}
-
