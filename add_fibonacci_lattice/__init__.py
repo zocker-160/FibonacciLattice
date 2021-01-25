@@ -1,8 +1,8 @@
 bl_info = {
     "name": "Fibonacci Lattice",
-    "author": "Jan Pinter",
-    "version": (3, 9),
-    "blender": (2, 63, 0),
+    "author": "Jan Pinter (updated to 2.80+ by zocker_160)",
+    "version": (3, 10),
+    "blender": (2, 91, 2),
     "location": "View3D > Add > Mesh",
     "description": "Add Fibonacci lattice mesh",
     "category": "Add Mesh",
