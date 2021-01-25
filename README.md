@@ -1,11 +1,20 @@
 # Fibonacci Lattice
-Blender 2.7x addon for generating uniformly distributed points on a sphere using Fibonacci lattices
+
+Blender addon for generating uniformly distributed points on a sphere using Fibonacci lattices
 [(show animation)](https://raw.github.com/P-i-N/FibonacciLattice/master/animation.gif)
 
-### Installation and usage
+### Installation
 
- - copy `add_fibonacci_lattice` into **Blender/2.7x/scripts/addons** directory
- - go to Blender's `User Preferences` => `Add-ons`, check **Add Mesh: Fibonacci Lattice**
- - in 3D view select `Add` => `Mesh` => `Fib. lattice`
- - set desired parameters (number of points, radius...)
- - enjoy!
+- download zip file from the Github-Releases page
+- install zip file as addon into Blender
+
+### Usage
+
+- in 3D view select `Add` => `Mesh` => `Fib. lattice`
+- set desired parameters (number of points, radius...) in the bottom left panel
+- enjoy!
+
+#### Supported Blender versions
+
+- Blender 2.83 LTS and up
+- Blender 2.91 and up
