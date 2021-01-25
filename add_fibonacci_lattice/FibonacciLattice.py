@@ -109,4 +109,3 @@ class add_mesh_fibonacci_lattice(bpy.types.Operator):
     def invoke(self, context, event):
         self.execute(context)
         return {'FINISHED'}
-
