@@ -26,26 +26,34 @@ class add_mesh_fibonacci_lattice(bpy.types.Operator):
     bl_description = "adds Fibonacci lattice"
   
     # Whether to add or update.
-    edit = BoolProperty(name="",
+    edit: BoolProperty(
+        name="",
         description="",
         default=False,
-        options={'HIDDEN'})
+        options={'HIDDEN'}
+    )
     
     # Number of lattice points
-    fl_Num_Points = IntProperty(attr='fl_Num_Points',
+    fl_Num_Points: IntProperty(
+        attr='fl_Num_Points',
         name='Number of points', default = 50,
         min = 1, soft_min = 1,
-        description='Number of points to be distributed on Fibonacci lattice')
+        description='Number of points to be distributed on Fibonacci lattice'
+    )
        
     # Radius
-    fl_Radius = FloatProperty(attr='fl_Radius',
+    fl_Radius: FloatProperty(
+        attr='fl_Radius',
         name='Radius', default = 1,
         min = 0, soft_min = 0,
-        description='Sphere which the Fibonacci lattice will be wrapped around')
+        description='Sphere which the Fibonacci lattice will be wrapped around'
+    )
 
-    fl_Edges = BoolProperty(attr='fl_Edges',
+    fl_Edges: BoolProperty(
+        attr='fl_Edges',
         name="Generate edges", default = False,
-        description="Generate edges for lattice spiral (uncheck for vertices only)")
+        description="Generate edges for lattice spiral (uncheck for vertices only)"
+    )
                         
     def draw(self, context):
         layout = self.layout
